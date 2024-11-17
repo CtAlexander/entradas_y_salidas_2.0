@@ -133,7 +133,44 @@
         #main-content.collapsed {
             margin-left: 20px;
         }
+         }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #00b954;
+            margin-bottom: 20px;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffffff;
+            background-color: #00b954;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #009847;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
     </style>
+     <a href="proyecto.html" class="back-button">Regresar a Aceites y Lípidos BD</a>
 </head>
 <body>
     <button class="toggle-btn" onclick="toggleSidebar()">
