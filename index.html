@@ -132,13 +132,39 @@
 
         #main-content.collapsed {
             margin-left: 20px;
-        }
+
+       .boton-regresar {
+    display: inline-block;
+    padding: 12px 20px;
+    background-color: #1C1C1C; /* Color de fondo oscuro */
+    color: #E5C100; /* Color del texto amarillo */
+    border: 2px solid #E5C100; /* Borde amarillo */
+    border-radius: 25px; /* Bordes redondeados */
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none; /* Sin subrayado */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+}
+
+.boton-regresar:hover {
+    background-color: #E5C100; /* Fondo amarillo al pasar el cursor */
+    color: #1C1C1C; /* Texto oscuro al pasar el cursor */
+}
+     
     </style>
 </head>
 <body>
+
+    <a href=" https://ctalexander.github.io/ACEITES-Y-LIPIDOS-BD-/" class="boton-regresar">Regresar a la Plataforma</a>
+
+
     <button class="toggle-btn" onclick="toggleSidebar()">
         <span class="arrow">&#9664;</span>
     </button>
+
 
     <div class="sidebar" id="sidebar">
         <button onclick="showPage('entradas-salidas')">Entradas y Salidas</button>
