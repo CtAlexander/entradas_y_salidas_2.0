@@ -132,33 +132,33 @@
 
         #main-content.collapsed {
             margin-left: 20px;
-
-       .boton-regresar {
-    display: inline-block;
-    padding: 12px 20px;
-    background-color: #1C1C1C; /* Color de fondo oscuro */
-    color: #E5C100; /* Color del texto amarillo */
-    border: 2px solid #E5C100; /* Borde amarillo */
-    border-radius: 25px; /* Bordes redondeados */
-    font-size: 16px;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-align: center;
+ }
+.boton-regresar {
+    display: block; /* Se alinea como un bloque para facilitar la colocación */
+    width: 100px; /* Botón más pequeño */
+    padding: 5px 10px; /* Menor espacio interior */
+    background-color: #1C1C1C; /* Fondo oscuro */
+    color: #E5C100; /* Texto amarillo */
+    border: 1px solid #E5C100; /* Borde más fino */
+    border-radius: 10px; /* Bordes redondeados */
+    font-size: 12px; /* Texto más pequeño */
+    font-weight: bold; /* Negrita */
+    text-align: center; /* Centrar texto */
     text-decoration: none; /* Sin subrayado */
-    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 10px 0; /* Espacio alrededor del botón */
     cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .boton-regresar:hover {
-    background-color: #E5C100; /* Fondo amarillo al pasar el cursor */
-    color: #1C1C1C; /* Texto oscuro al pasar el cursor */
+    background-color: #E5C100; /* Fondo amarillo */
+    color: #1C1C1C; /* Texto negro */
 }
-     
+
     </style>
 </head>
 <body>
 
-    <a href=" https://ctalexander.github.io/ACEITES-Y-LIPIDOS-BD-/" class="boton-regresar">Regresar a la Plataforma</a>
 
 
     <button class="toggle-btn" onclick="toggleSidebar()">
@@ -175,6 +175,7 @@
             <button onclick="filtrarRegistros('Salida')">Mostrar Solo Salidas</button>
             <button onclick="filtrarRegistros('Todos')">Mostrar Todos</button>
             <button onclick="generarPDF()">Descargar en PDF</button>
+            <a href=" https://ctalexander.github.io/ACEITES-Y-LIPIDOS-BD-/" class="boton-regresar">Regresar a la Plataforma</a>
         </div>
     </div>
 
