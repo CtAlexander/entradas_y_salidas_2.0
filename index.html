@@ -132,39 +132,13 @@
 
         #main-content.collapsed {
             margin-left: 20px;
- }
-.boton-regresar {
-    display: block; /* Se alinea como un bloque para facilitar la colocación */
-    width: 100px; /* Botón más pequeño */
-    padding: 5px 10px; /* Menor espacio interior */
-    background-color: #1C1C1C; /* Fondo oscuro */
-    color: #E5C100; /* Texto amarillo */
-    border: 1px solid #E5C100; /* Borde más fino */
-    border-radius: 10px; /* Bordes redondeados */
-    font-size: 12px; /* Texto más pequeño */
-    font-weight: bold; /* Negrita */
-    text-align: center; /* Centrar texto */
-    text-decoration: none; /* Sin subrayado */
-    margin: 10px 0; /* Espacio alrededor del botón */
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.boton-regresar:hover {
-    background-color: #E5C100; /* Fondo amarillo */
-    color: #1C1C1C; /* Texto negro */
-}
-
+        }
     </style>
 </head>
 <body>
-
-
-
     <button class="toggle-btn" onclick="toggleSidebar()">
         <span class="arrow">&#9664;</span>
     </button>
-
 
     <div class="sidebar" id="sidebar">
         <button onclick="showPage('entradas-salidas')">Entradas y Salidas</button>
@@ -175,8 +149,6 @@
             <button onclick="filtrarRegistros('Salida')">Mostrar Solo Salidas</button>
             <button onclick="filtrarRegistros('Todos')">Mostrar Todos</button>
             <button onclick="generarPDF()">Descargar en PDF</button>
-            <a href=" https://ctalexander.github.io/ACEITES-Y-LIPIDOS-BD-/" class="boton-regresar">Regresar a la Plataforma</a>
-        
         </div>
     </div>
 
@@ -188,21 +160,21 @@
             <h1>Entradas y Salidas</h1>
 
             <!-- Aplicación principal -->
-            <div id="app-container">
-                <form id="entryForm">
-                    <input type="date" id="fecha" required>
-                    <input type="text" id="nombre" placeholder="Nombre" required>
-                    <input type="text" id="empresa" placeholder="Empresa" required>
-                    <input type="time" id="hora" required>
-                    <input type="text" id="producto" placeholder="Producto" required>
-                    <input type="number" id="cantidad" placeholder="Cantidad" required>
-                    <input type="text" id="autorizado" placeholder="Autorizado por" required>
-                    <select id="tipo" required>
-                        <option value="Entrada">Entrada</option>
-                        <option value="Salida">Salida</option>
-                    </select>
-                    <button type="button" onclick="agregarRegistro()">Agregar</button>
-                </form>
+            <form id="entryForm">
+    <input type="date" id="fecha" required>
+    <input type="text" id="nombre" placeholder="Nombre" required>
+    <input type="text" id="empresa" placeholder="Empresa" required>
+    <input type="time" id="hora" required>
+    <input type="text" id="producto" placeholder="Producto" required>
+    <input type="number" id="cantidad" placeholder="Cantidad" required>
+    <input type="text" id="autorizado" placeholder="Autorizado por" required>
+    <input type="text" id="motivo" placeholder="Motivo" required> <!-- Campo nuevo -->
+    <select id="tipo" required>
+        <option value="Entrada">Entrada</option>
+        <option value="Salida">Salida</option>
+    </select>
+    <button type="button" onclick="agregarRegistro()">Agregar</button>
+</form>
 
                 <!-- Tabla de registros -->
                 <table id="entriesTable">
@@ -215,6 +187,7 @@
                             <th>Producto</th>
                             <th>Cantidad</th>
                             <th>Autorizado</th>
+                            <th>Motivo</th> <!-- Nueva columna -->
                             <th>Tipo</th>
                             <th>Acción</th>
                         </tr>
@@ -492,6 +465,54 @@
                 doc.save('registro_entradas_salidas.pdf');
             });
         };
+
+        window.agregarRegistro = function() {
+    const fecha = document.getElementById('fecha').value;
+    const nombre = document.getElementById('nombre').value;
+    const empresa = document.getElementById('empresa').value;
+    const hora = document.getElementById('hora').value;
+    const producto = document.getElementById('producto').value;
+    const cantidad = document.getElementById('cantidad').value;
+    const autorizado = document.getElementById('autorizado').value;
+    const motivo = document.getElementById('motivo').value; // Nuevo campo
+    const tipo = document.getElementById('tipo').value;
+
+    if (!fecha || !nombre || !empresa || !hora || !producto || !cantidad || !autorizado || !motivo || !tipo) {
+        alert("Por favor, completa todos los campos.");
+        return;
+    }
+
+    const registro = { fecha, nombre, empresa, hora, producto, cantidad, autorizado, motivo, tipo }; // Incluye motivo
+    const registrosRef = ref(db, 'registros');
+    push(registrosRef, registro).then(() => {
+        alert("Registro agregado con éxito");
+        cargarRegistros();
+        document.getElementById('entryForm').reset();
+    }).catch((error) => {
+        console.error("Error al agregar el registro: ", error);
+    });
+};
+
+window.agregarFilaATabla = function(registro, key) {
+    const registroBody = document.getElementById('registro-body');
+    const fila = document.createElement('tr');
+
+    fila.innerHTML = `
+        <td>${registro.fecha}</td>
+        <td>${registro.nombre}</td>
+        <td>${registro.empresa}</td>
+        <td>${registro.hora}</td>
+        <td>${registro.producto}</td>
+        <td>${registro.cantidad}</td>
+        <td>${registro.autorizado}</td>
+        <td>${registro.motivo}</td> <!-- Muestra el motivo -->
+        <td>${registro.tipo}</td>
+        <td><button onclick="eliminarRegistro('${key}')">Eliminar</button></td>
+    `;
+
+    registroBody.appendChild(fila);
+};
+
     </script>
 </body>
 </html>
